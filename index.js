@@ -1,3 +1,3 @@
-const { exitWithError, run } = require("./lib/run");
+const { exitWithError, run } = require('./lib/run');
 
 run().catch(exitWithError);
