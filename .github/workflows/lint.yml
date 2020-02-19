@@ -8,5 +8,5 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - uses: jonaszjestem/eslint-action@test
-        with:
-          repo-token: ${{secrets.GITHUB_TOKEN}}
+        env:
+          GITHUB_TOKEN: ${{ secrets.github_token }}
