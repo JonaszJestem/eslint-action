@@ -1,3 +1,3 @@
-import { exitWithError, run } from "./lib/run";
+const { exitWithError, run } = require("./lib/run");
 
 run().catch(exitWithError);
