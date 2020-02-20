@@ -24,7 +24,7 @@ function getIgnorePattern() {
 }
 
 export const ESLINT_OPTIONS = {
-  extensions: [".js"],
+  extensions: [".js", ".ts", ".tsx", ".jsx", ".vue"],
   ignorePath: ".gitignore",
   ignorePattern: getIgnorePattern()
 };
