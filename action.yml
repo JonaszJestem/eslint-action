@@ -2,4 +2,4 @@ name: 'ESLint Action'
 description: 'Lint your Javascript projects with inline lint error annotations on pull requests.'
 runs:
   using: 'node12'
-  main: 'index.js'
+  main: 'lib/index.js'

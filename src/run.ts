@@ -4,7 +4,7 @@ import { CLIEngine as eslintEngine } from "eslint";
 
 const { GITHUB_WORKSPACE = [] } = process.env;
 
-function lint() {
+const lint = () => {
   const cli = new eslintEngine(ESLINT_OPTIONS);
   const report = cli.executeOnFiles(["."]);
   const { results, errorCount, warningCount } = report;
@@ -36,9 +36,9 @@ function lint() {
       annotations
     }
   };
-}
+};
 
-const exitWithError = err => {
+export const exitWithError = err => {
   console.error("Error", err.stack);
   if (err.data) {
     console.error(err.data);
@@ -46,7 +46,7 @@ const exitWithError = err => {
   process.exit(1);
 };
 
-const run = async () => {
+export const run = async () => {
   const id = await createCheck();
   try {
     const { conclusion, output } = lint();
@@ -60,5 +60,3 @@ const run = async () => {
     exitWithError(err);
   }
 };
-
-module.exports = { run, exitWithError };
