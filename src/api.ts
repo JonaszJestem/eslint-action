@@ -1,13 +1,23 @@
 import request from "./request";
+import { CHECK_NAME, CREATE_CHECK_BODY, HEADERS } from "./constants";
 
-const { GITHUB_EVENT_PATH } = process.env;
-// eslint-disable-next-line import/no-dynamic-require
-const event = require(GITHUB_EVENT_PATH);
-const { repository } = event;
-const {
-  owner: { login: owner }
-} = repository;
-const { name: repo } = repository;
+const { GITHUB_EVENT_PATH, GITHUB_SHA } = process.env;
+
+const getRepositoryPath = () => {
+  if (GITHUB_EVENT_PATH) {
+    // eslint-disable-next-line import/no-dynamic-require
+    const event = require(GITHUB_EVENT_PATH);
+    const { repository } = event;
+    const {
+      owner: { login: owner }
+    } = repository;
+    const { name: repo } = repository;
+    return { owner, repo };
+  }
+  return {};
+};
+
+const { owner, repo } = getRepositoryPath();
 
 export const createCheck = async () => {
   const { data } = await request(

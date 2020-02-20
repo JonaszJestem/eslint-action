@@ -1,11 +1,11 @@
 import { createCheck, updateCheck } from "./api";
+import { CHECK_NAME, ESLINT_OPTIONS } from "./constants";
+import { CLIEngine as eslintEngine } from "eslint";
 
-import eslint from "eslint";
-
-const { GITHUB_WORKSPACE } = process.env;
+const { GITHUB_WORKSPACE = [] } = process.env;
 
 function lint() {
-  const cli = new eslint.CLIEngine(ESLINT_OPTIONS);
+  const cli = new eslintEngine(ESLINT_OPTIONS);
   const report = cli.executeOnFiles(["."]);
   const { results, errorCount, warningCount } = report;
 
@@ -60,7 +60,5 @@ const run = async () => {
     exitWithError(err);
   }
 };
-
-;
 
 module.exports = { run, exitWithError };
